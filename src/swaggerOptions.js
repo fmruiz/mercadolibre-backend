@@ -8,7 +8,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:9000"
+                url: "https://safe-meadow-76300.herokuapp.com"
             }
         ]
     },
