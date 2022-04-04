@@ -1,16 +1,25 @@
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
 
-const items = require('./routes/items.routes');
+// Swagger
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const options = require('./swaggerOptions')
+
+const items = require("./routes/items.routes");
 
 const app = express();
 
 // middlewares
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 app.use(cors());
 
-app.use('/api/items', items);
+const specs = swaggerJsDoc(options)
+
+app.use("/api/items", items);
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
+
 
 // init server
 const PORT = process.env.PORT || 9000;
